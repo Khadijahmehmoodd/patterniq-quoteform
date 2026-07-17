@@ -1,5 +1,5 @@
 // Vercel Serverless Function
-// File location: /api/contact-form.js
+// File location: /api/get-a-quote.js
 
 export default async function handler(req, res) {
   // CORS
@@ -42,7 +42,8 @@ export default async function handler(req, res) {
       !message
     ) {
       return res.status(400).json({
-        error: "Missing required fields.",
+        error:
+          "Missing required fields: fname, surname, email, phone, options, address, postcode, message",
       });
     }
 
@@ -69,11 +70,11 @@ export default async function handler(req, res) {
         reply_to: email,
         subject: `New Quote Request - ${fullName}`,
         html: `
-          <div style="font-family:Arial,Helvetica,sans-serif;max-width:700px;margin:auto;color:#333;line-height:1.6;">
+          <div style="font-family: Arial, Helvetica, sans-serif; max-width:700px; margin:auto; color:#333; line-height:1.6;">
 
             <h2 style="color:#1F4A7C;">New Quote Request</h2>
 
-            <table style="width:100%;border-collapse:collapse;">
+            <table style="width:100%; border-collapse:collapse;">
 
               <tr>
                 <td style="padding:8px 0;"><strong>First Name</strong></td>
@@ -116,7 +117,7 @@ export default async function handler(req, res) {
 
             <h3 style="margin-bottom:10px;">Message</h3>
 
-            <p>${escapeHtml(message).replace(/\n/g,"<br>")}</p>
+            <p>${escapeHtml(message).replace(/\n/g, "<br>")}</p>
 
             <hr style="margin:30px 0;border:none;border-top:1px solid #ddd;">
 
@@ -128,7 +129,7 @@ export default async function handler(req, res) {
                 style="display:inline-block;vertical-align:middle;text-decoration:none;"
               >
                 <img
-                  src="https://patterniq-contactform.vercel.app/patterniq.svg"
+                  src="https://patterniq-quoteform.vercel.app/patterniq.svg"
                   alt="PatternIQ"
                   width="80"
                   style="display:inline-block;vertical-align:middle;margin-right:12px;border:0;"
@@ -177,6 +178,7 @@ export default async function handler(req, res) {
   }
 }
 
+// Prevent HTML injection
 function escapeHtml(str) {
   return String(str)
     .replace(/&/g, "&amp;")
