@@ -70,7 +70,7 @@ export default async function handler(req, res) {
         reply_to: email,
         subject: `New Quote Request - ${fullName}`,
         html: `
-          <div style="font-family: Arial, Helvetica, sans-serif; max-width:700px; margin:auto; color:#333; line-height:1.6;">
+          <div style="font-family: Arial, Helvetica, sans-serif; max-width:1000px; margin: auto; color:#333;">
 
             <h2 style="color:#1F4A7C;">New Quote Request</h2>
 
